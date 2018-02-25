@@ -52,6 +52,39 @@ void loop()
   }
   else if (countdown < 0) {
     lcd.print(countdown); //have 0.00 appear, doesnt work yet
+  } 
+}
+
+-------------------------------------------------------------------------------------------------------------------
+**Got 0.00 to appear at the end and found out what contrast meant. Don't know which variable controls the amount of decimal places
+the figure has**
+
+//Taken from video on Youtube that helped me attach the LCD to the breadboard
+//Countdown
+
+#include <LiquidCrystal.h>  
+int Contrast = 60; //higher contrast = show less of the pixels on the screen
+float countdown = 10; //make sure it countdowns from 10
+LiquidCrystal lcd (12, 11, 5, 4, 3, 2); //declare varibles
+
+void setup()
+{ 
+   analogWrite (6, Contrast);
+   lcd.begin (16, 2);
+}  
+void loop()
+{  
+  if (countdown >= 0) { //countdown stops at 0
+    lcd.setCursor(0, 0); //coordinates on the display (x, y)
+    lcd.print(countdown);
+    countdown -= 0.1; //decreases by a millisecond
+    delay(100); //delay so the worlds appear for 1 second
+  }
+  else if (countdown < 0) {
+    lcd.clear(); //clear screen to only show 0.00
+    lcd.print(countdown * -1); //have 0.00 appear, multiply by -1 otherwise it will be -0.00
+    exit(0); //exit loop
   }
     
 }
+
