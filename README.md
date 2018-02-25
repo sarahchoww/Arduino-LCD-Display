@@ -1,3 +1,3 @@
 # Arduino-LCD-Display
 
-<h1> Tracking of my progress with LCD Displays. </h1>
+<p> Tracking of my progress with LCD Displays. </p>
