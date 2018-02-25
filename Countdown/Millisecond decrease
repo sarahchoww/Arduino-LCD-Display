@@ -23,3 +23,35 @@ void loop()
   lcd.clear(); //clear screen from words and don't run again during the loop
     
 }
+
+-----------------------------------------------------------------------------------------------------
+
+**Currently, added the lcd.print(countdown) but it added another decimal place. (9.10 to 9.100), don't know why
+At the end of the countdown, the loop runs over and over again so the output is -0.00 over again on the screen**
+
+//Taken from video on Youtube that helped me attach the LCD to the breadboard
+//Countdown
+
+#include <LiquidCrystal.h>  
+int Contrast = 60; //playing around with this varibles
+float countdown = 10; //make sure it countdowns from 10
+LiquidCrystal lcd (12, 11, 5, 4, 3, 2); //declare varibles
+
+void setup()
+{ 
+   analogWrite (6,Contrast);
+   lcd.begin (16, 2);
+}  
+void loop()
+{  
+  if (countdown >= 0) { //countdown stops at 0
+    lcd.setCursor(0, 0); //coordinates on the display (x, y)
+    lcd.print(countdown);
+    countdown -= 0.1; //decreases by a millisecond
+    delay(100); //delay so the worlds appear for 1 second
+  }
+  else if (countdown < 0) {
+    lcd.print(countdown); //have 0.00 appear, doesnt work yet
+  }
+    
+}
