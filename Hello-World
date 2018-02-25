@@ -1,0 +1,24 @@
+//Taken from video on Youtube that helped me attach the LCD to the breadboard
+
+#include <LiquidCrystal.h>  
+int Contrast = 60; //playing around with this varibles
+int clearscreen = 0; //make sure it only plays once
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2); //declare varibles
+
+ void setup()
+ { 
+    analogWrite (6,Contrast);
+    lcd.begin (16, 2);
+ }  
+void loop()
+{  
+  if (clearscreen == 0){ 
+    lcd.setCursor(0, 0); //coordinates on the display (x, y)
+    lcd.print("Hello World");
+    clearscreen++; //only run through once
+    delay(3000); //delay so the worlds appear for 3 seconds
+  }
+
+  lcd.clear(); //clear screen from words and don't run again during the loop
+    
+}
