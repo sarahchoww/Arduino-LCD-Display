@@ -1,0 +1,35 @@
+/*
+OSEPP Sound Sensor Example
+
+OSEPP example of measure sound input from microphone sensor.
+depending on loudness, an LED brightness is changed.
+Louder sounds = brighter LED. Test with music to get a strobe
+
+*/
+
+//Taken from video on Youtube that helped me attach the LCD to the breadboard
+//Output sound values on display
+
+#include <LiquidCrystal.h>  
+int Contrast = 50; //higher contrast = show less of the pixels on the screen
+LiquidCrystal lcd (12, 11, 5, 4, 3, 2); //declare varibles
+
+
+int micPin = A0;    // microphone sensor input
+int micValue = 0;  // variable to store the value coming from the mic sensor
+
+void setup() {
+   analogWrite (6, Contrast);
+   lcd.begin (16, 2);
+
+}
+
+void loop() {
+  // read the value from the sensor:
+  micValue = analogRead(micPin);  
+  micValue = constrain(micValue, 0, 100); //set sound detect clamp 0-100  
+  
+  lcd.print(micValue); //show sound value on display
+  delay(250); //refresh every 0.5 seconds
+  lcd.clear(); //clear screen for new value
+}
