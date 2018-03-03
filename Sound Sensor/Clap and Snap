@@ -28,14 +28,14 @@ void loop() {
   micValue = constrain(micValue, 0, 100); //set sound detect clamp 0-100  
 
 
-  if (micValue >= oldMicValue + 30)
+  if (micValue >= oldMicValue + 20)
   {
     lcd.setCursor(6, 0); //coordinates on the display (x, y)
     lcd.print("SNAP"); //show sound value on display
-    digitalWrite(LED_BUILTIN, LOW); //turn LED on when hear a clap
+    digitalWrite(LED_BUILTIN, LOW); //turn LED on when hear a snap
     delay(250); //refresh every 0.5 seconds
   }
-  else if ((micValue >= oldMicValue + 5) && (micValue < oldMicValue + 30))
+  else if ((micValue >= oldMicValue + 5) && (micValue < oldMicValue + 20))
   {
     lcd.setCursor(6, 0); //coordinates on the display (x, y)
     lcd.print("CLAP"); //show sound value on display
