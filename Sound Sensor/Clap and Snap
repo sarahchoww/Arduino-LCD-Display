@@ -23,7 +23,6 @@ void setup() {
 
 void loop() {
   // read the value from the sensor:
-  
   micValue = 0; //reset to zero to have a constant base
   micValue = analogRead(micPin);  
   micValue = constrain(micValue, 0, 100); //set sound detect clamp 0-100  
@@ -44,8 +43,6 @@ void loop() {
     delay(250); //refresh every 0.5 seconds
   }
   
-  
   oldMicValue = micValue; //set previous value to another variable for comparison
-  lcd.clear(); //clear screen for new value
   
 }
