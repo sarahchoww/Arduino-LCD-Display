@@ -1,6 +1,8 @@
 /*
-Clap show on LCD Display
-
+  Clap and snap show on LCD Display
+  The LED on the Arduino shows the last recognized action:
+    LED remains on until a snap has been recognized
+    LED remins off until a clap has been recognized
 */
 
 
@@ -21,7 +23,7 @@ void setup() {
 
 void loop() {
   // read the value from the sensor:
-  digitalWrite(LED_BUILTIN, LOW); //turn LED off
+  
   micValue = 0; //reset to zero to have a constant base
   micValue = analogRead(micPin);  
   micValue = constrain(micValue, 0, 100); //set sound detect clamp 0-100  
@@ -38,6 +40,7 @@ void loop() {
   {
     lcd.setCursor(6, 0); //coordinates on the display (x, y)
     lcd.print("SNAP"); //show sound value on display
+    digitalWrite(LED_BUILTIN, LOW); //turn LED off
     delay(250); //refresh every 0.5 seconds
   }
   
