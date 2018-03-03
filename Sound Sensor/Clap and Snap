@@ -1,0 +1,47 @@
+** A few errors when a clap is recognized as a snap but overall works pretty well**
+
+/*
+Clap show on LCD Display
+
+*/
+
+
+#include <LiquidCrystal.h>  
+int Contrast = 50; //higher contrast = show less of the pixels on the screen
+LiquidCrystal lcd (12, 11, 5, 4, 3, 2); //declare varibles
+
+
+int micPin = A0;    // microphone sensor input
+int micValue = 0;  // variable to store the value coming from the mic sensor
+int oldMicValue = 0; //variable to store the old value of the mic sensor
+
+void setup() {
+   analogWrite (6, Contrast);
+   lcd.begin (16, 2);
+}
+
+void loop() {
+  // read the value from the sensor:
+  micValue = 0; //reset to zero to have a constant base
+  micValue = analogRead(micPin);  
+  micValue = constrain(micValue, 0, 100); //set sound detect clamp 0-100  
+
+
+  if (micValue >= oldMicValue + 23)
+  {
+    lcd.setCursor(6, 0); //coordinates on the display (x, y)
+    lcd.print("CLAP"); //show sound value on display
+    delay(250); //refresh every 0.5 seconds
+  }
+  else if ((micValue >= oldMicValue + 5) && (micValue < oldMicValue + 23))
+  {
+    lcd.setCursor(6, 0); //coordinates on the display (x, y)
+    lcd.print("SNAP"); //show sound value on display
+    delay(250); //refresh every 0.5 seconds
+  }
+  
+  
+  oldMicValue = micValue; //set previous value to another variable for comparison
+  lcd.clear(); //clear screen for new value
+  
+}
