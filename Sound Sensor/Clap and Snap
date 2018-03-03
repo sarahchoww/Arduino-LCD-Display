@@ -1,5 +1,3 @@
-** A few errors when a clap is recognized as a snap but overall works pretty well**
-
 /*
 Clap show on LCD Display
 
@@ -17,23 +15,26 @@ int oldMicValue = 0; //variable to store the old value of the mic sensor
 
 void setup() {
    analogWrite (6, Contrast);
+   pinMode (LED_BUILTIN, OUTPUT); //use the LED on Arudino
    lcd.begin (16, 2);
 }
 
 void loop() {
   // read the value from the sensor:
+  digitalWrite(LED_BUILTIN, LOW); //turn LED off
   micValue = 0; //reset to zero to have a constant base
   micValue = analogRead(micPin);  
   micValue = constrain(micValue, 0, 100); //set sound detect clamp 0-100  
 
 
-  if (micValue >= oldMicValue + 23)
+  if (micValue >= oldMicValue + 20)
   {
     lcd.setCursor(6, 0); //coordinates on the display (x, y)
     lcd.print("CLAP"); //show sound value on display
+    digitalWrite(LED_BUILTIN, HIGH); //turn LED on when hear a clap
     delay(250); //refresh every 0.5 seconds
   }
-  else if ((micValue >= oldMicValue + 5) && (micValue < oldMicValue + 23))
+  else if ((micValue >= oldMicValue + 5) && (micValue < oldMicValue + 20))
   {
     lcd.setCursor(6, 0); //coordinates on the display (x, y)
     lcd.print("SNAP"); //show sound value on display
